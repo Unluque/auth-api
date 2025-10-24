@@ -283,6 +283,7 @@ Generates a new access token using a valid refresh token.
     ```
 - **Response (500 Internal Server Error):**
     ```json
+    {
       "error": "Internal server error"
     }
     ```
