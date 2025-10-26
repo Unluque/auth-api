@@ -1,5 +1,6 @@
 services:
   app:
+    container_name: auth-api
     build:
       context: .
       dockerfile: Dockerfile
@@ -21,6 +22,7 @@ services:
     command: npm run start
 
   mongo:
+    container_name: auth-api-mongodb
     image: mongo:latest
     ports:
       - "27017:27017"

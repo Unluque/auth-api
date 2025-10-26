@@ -372,3 +372,88 @@ MONGO_INITDB_ROOT_USERNAME=
 MONGO_INITDB_ROOT_PASSWORD=
 MONGO_INITDB_DATABASE=
 ```
+
+
+## Deployment
+
+This section outlines how to deploy the Authentication API using `npm` and `Docker`.
+
+### Deploy with npm
+
+To deploy the project using `npm`, follow these steps:
+
+1.  **Clone the repository:**
+    ```bash
+    git clone https://github.com/your-repo/auth-api.git
+    cd auth-api
+    ```
+2.  **Install dependencies:**
+    ```bash
+    npm install
+    ```
+3.  **Set up environment variables:**
+    Create a `.env` file in the root directory based on `.env.sample` and fill in the required values.
+    ```
+    MONGO_URI=your_mongodb_connection_string
+    REFRESH_TOKEN_SECRET=your_refresh_token_secret
+    REFRESH_TOKEN_EXPIRES_IN=7d
+    ACCESS_TOKEN_SECRET=your_access_token_secret
+    ACCESS_TOKEN_EXPIRES_IN=15m
+    REGISTER_TOKEN_EXPIRATION_MINUTES=30
+    PORT=5000
+    NODE_ENV='production'
+    API_KEY='your_secret_api_key'
+    MONGO_INITDB_ROOT_USERNAME=your_mongo_username
+    MONGO_INITDB_ROOT_PASSWORD=your_mongo_password
+    MONGO_INITDB_DATABASE=your_mongo_database
+    ```
+4.  **Run the application:**
+    ```bash
+    npm start
+    ```
+    The API will be running on the port specified in your `.env` file (default: 5000).
+
+### Deploy with Docker
+
+To deploy the project using Docker, follow these steps:
+
+1.  **Clone the repository:**
+    ```bash
+    git clone https://github.com/your-repo/auth-api.git
+    cd auth-api
+    ```
+2.  **Set up environment variables:**
+    Create a `.env` file in the root directory based on `.env.sample` and fill in the required values. These environment variables will be used by the Docker containers.
+    ```
+    MONGO_URI=mongodb://username:password@mongo:27017/auth-api?authSource=admin # Use 'mongodb' as the hostname for Docker Compose
+    REFRESH_TOKEN_SECRET=your_refresh_token_secret
+    REFRESH_TOKEN_EXPIRES_IN=7d
+    ACCESS_TOKEN_SECRET=your_access_token_secret
+    ACCESS_TOKEN_EXPIRES_IN=15m
+    REGISTER_TOKEN_EXPIRATION_MINUTES=30
+    PORT=5000
+    NODE_ENV='production'
+    API_KEY='your_secret_api_key'
+    MONGO_INITDB_ROOT_USERNAME=your_mongo_username
+    MONGO_INITDB_ROOT_PASSWORD=your_mongo_password
+    MONGO_INITDB_DATABASE=auth_db
+    ```
+3.  **Build and run the Docker containers:**
+    Make sure you have Docker and Docker Compose installed. From the root of the project directory, run:
+    ```bash
+    docker-compose up --build -d
+    ```
+    This command will:
+    *   Build the Docker image for the Node.js application.
+    *   Start the Node.js application container and a MongoDB container.
+    *   Run them in detached mode (`-d`).
+
+4.  **Verify deployment:**
+    The API should be accessible at `http://localhost:5000`. You can check the logs of the running containers using:
+    ```bash
+    docker-compose logs
+    ```
+    To stop the containers:
+    ```bash
+    docker-compose down
+    ```
