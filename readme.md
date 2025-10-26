@@ -123,7 +123,7 @@ Verifies a user's account using the verification token received after registrati
     }
     ```
 
-#### `POST /api/auth/verify/access-token`
+#### `POST /api/auth/session/access-token`
 Validates an access token to check its authenticity and expiry.
 
 - **Request Body:**
@@ -302,7 +302,7 @@ The API uses a combination of access tokens and refresh tokens for secure authen
     *   The client should store both tokens securely. The `accessToken` is typically stored in memory, and the `refreshToken` can be stored in an HTTP-only cookie or secure local storage.
 
 2.  **Accessing Protected Resources**:
-    *   To verify if an `accessToken` is still valid, the client should send a `POST` request to `/api/auth/verify/access-token` with the `accessToken` in the request body.
+    *   To verify if an `accessToken` is still valid, the client should send a `POST` request to `/api/auth/session/access-token` with the `accessToken` in the request body.
     *   If the token is valid, the API will respond with a success message. If it's expired or invalid, an appropriate error will be returned.
     *   For protected endpoints, the client must include the `accessToken` in the `Authorization` header as a Bearer token: `Authorization: Bearer <accessToken>`. The server-side middleware will then validate this token.
 
