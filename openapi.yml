@@ -158,7 +158,7 @@ paths:
                   error:
                     type: string
 
-  /api/verify/access-token:
+  /api/session/access-token:
     post:
       summary: Validate an access token
       tags:
