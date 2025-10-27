@@ -1,5 +1,5 @@
 services:
-  app:
+  api:
     container_name: auth-api
     build:
       context: .
@@ -27,17 +27,17 @@ services:
     ports:
       - "27017:27017"
     environment:
-      MONGO_INITDB_ROOT_USERNAME: myuser
-      MONGO_INITDB_ROOT_PASSWORD: mypassword
-      MONGO_INITDB_DATABASE: auth-api
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
+      MONGO_INITDB_DATABASE: ${MONGO_INITDB_DATABASE}
     volumes:
-      - mongo-data:/data/db
+      - mongodb_data:/data/db
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "mongo", "--eval", "db.adminCommand('ping')"]
+      test: echo 'db.runCommand("ping").ok' | mongosh "mongodb://$${MONGO_INITDB_ROOT_USERNAME}:$${MONGO_INITDB_ROOT_PASSWORD}@localhost:27017/admin" --quiet
       interval: 10s
       timeout: 5s
       retries: 5
 
 volumes:
-  mongo-data:
+  mongodb_data:

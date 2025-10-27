@@ -10,7 +10,7 @@ const protect = asyncHandler(async (req, res, next) => {
       token = req.headers.authorization.split(' ')[1];
 
       // Make a call to the /verify/access-token endpoint
-      const response = await fetch('http://localhost:5000/api/auth/verify/access-token', { // Assuming the API is running on localhost:5000
+      const response = await fetch('http://localhost:5000/api/auth/session/access-token', { // Assuming the API is running on localhost:5000
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

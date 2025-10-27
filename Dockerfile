@@ -17,7 +17,7 @@ COPY . .
 ENV NODE_ENV=production
 
 # Expose port
-ARG PORT=3000
+ARG PORT=5000
 ENV PORT=$PORT
 EXPOSE $PORT
 
